@@ -1,8 +1,7 @@
 
-import { ArrowDown, Users, Target, Briefcase, Clock, ChevronRight } from "lucide-react";
+import { ArrowDown, Users, Target, Briefcase, Clock, ChevronRight, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 
 const Index = () => {
   const scrollToSection = (sectionId: string) => {
@@ -11,6 +10,12 @@ const Index = () => {
   };
 
   const currentProjects = [
+    {
+      title: "The Unified Public Service Platform (UPSP)",
+      description: "The Unified Public Service Platform (UPSP) makes money by selling software-as-a-service (SaaS) licenses to local governments, not to citizens. The services themselves (like applying for housing, reporting an issue, etc.) are still free for citizens — the platform just improves how those services are delivered. Councils and agencies pay us to provide the technology infrastructure, because it saves them money, improves service quality, and meets their digital transformation goals.",
+      status: "Active",
+      completion: 95
+    },
     {
       title: "Enterprise AI Solutions",
       description: "Developing next-generation artificial intelligence systems for enterprise-level automation and decision making.",
@@ -77,6 +82,12 @@ const Index = () => {
             >
               Upcoming
             </button>
+            <button 
+              onClick={() => scrollToSection('contact')}
+              className="text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Contact
+            </button>
           </div>
         </div>
       </nav>
@@ -111,7 +122,6 @@ const Index = () => {
         <div className="container mx-auto max-w-6xl">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <div>
-              <Badge variant="outline" className="mb-4">Who We Are</Badge>
               <h2 className="text-4xl md:text-5xl font-bold mb-6">
                 Innovation Meets Excellence
               </h2>
@@ -168,7 +178,6 @@ const Index = () => {
       <section className="py-24 px-6 bg-muted/30">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
-            <Badge variant="outline" className="mb-4">What We Do</Badge>
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
               Transforming Ideas Into Reality
             </h2>
@@ -212,7 +221,6 @@ const Index = () => {
       <section id="projects" className="py-24 px-6">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
-            <Badge variant="outline" className="mb-4">Current Projects</Badge>
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
               Active Initiatives
             </h2>
@@ -257,7 +265,6 @@ const Index = () => {
       <section id="upcoming" className="py-24 px-6 bg-muted/30">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
-            <Badge variant="outline" className="mb-4">Upcoming Projects</Badge>
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
               Future Innovations
             </h2>
@@ -288,6 +295,30 @@ const Index = () => {
                 </CardHeader>
               </Card>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="py-24 px-6">
+        <div className="container mx-auto max-w-6xl">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              Get In Touch
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
+              Ready to transform your business with innovative technology solutions? Contact us to discuss your project.
+            </p>
+            
+            <div className="flex items-center justify-center space-x-3 text-lg">
+              <Mail className="h-5 w-5" />
+              <a 
+                href="mailto:info@oxodonia.co.uk" 
+                className="text-foreground hover:text-muted-foreground transition-colors underline"
+              >
+                info@oxodonia.co.uk
+              </a>
+            </div>
           </div>
         </div>
       </section>
