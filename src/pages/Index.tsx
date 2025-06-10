@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Mail, Phone, MapPin, ChevronDown } from "lucide-react";
@@ -284,33 +283,11 @@ const Index = () => {
                   <span className="text-lg text-gray-700">info@oxodonia.co.uk</span>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <Phone className="h-6 w-6 text-blue-600" />
-                  <span className="text-lg text-gray-700">+44 (0) 20 7946 0958</span>
-                </div>
-                <div className="flex items-center space-x-3">
                   <MapPin className="h-6 w-6 text-blue-600" />
-                  <span className="text-lg text-gray-700">London, United Kingdom</span>
+                  <span className="text-lg text-gray-700">Old Docks House, Watery Lane, Preston, Lancashire PR2</span>
                 </div>
               </div>
             </div>
-
-            <Card className="transform hover:scale-105 transition-all duration-300 hover:shadow-lg animate-bounce-gentle">
-              <CardHeader>
-                <CardTitle>Start Your Digital Transformation</CardTitle>
-                <CardDescription>
-                  Whether you're looking to modernize existing systems or build something entirely new, 
-                  we're here to help you succeed.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Button 
-                  className="w-full transform hover:scale-105 transition-all duration-300 animate-bounce-gentle" 
-                  size="lg"
-                >
-                  Schedule a Consultation
-                </Button>
-              </CardContent>
-            </Card>
           </div>
         </div>
       </section>
