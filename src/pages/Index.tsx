@@ -1,359 +1,334 @@
-import { ArrowDown, Users, Target, Briefcase, Clock, ChevronRight, Mail } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Mail, Phone, MapPin, ChevronDown } from "lucide-react";
+import { useEffect, useState } from "react";
 
 const Index = () => {
+  const [activeSection, setActiveSection] = useState("hero");
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ["hero", "about", "projects", "contact"];
+      const scrollPosition = window.scrollY + 100;
+
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const offsetTop = element.offsetTop;
+          const offsetHeight = element.offsetHeight;
+          
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
-    element?.scrollIntoView({ behavior: 'smooth' });
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
-  const currentProjects = [
-    {
-      title: "The Unified Public Service Platform (UPSP)",
-      description: "The Unified Public Service Platform (UPSP) makes money by selling software-as-a-service (SaaS) licenses to local governments, not to citizens. The services themselves (like applying for housing, reporting an issue, etc.) are still free for citizens — the platform just improves how those services are delivered. Councils and agencies pay us to provide the technology infrastructure, because it saves them money, improves service quality, and meets their digital transformation goals.",
-      status: "Active",
-      completion: 95
-    },
-    {
-      title: "Enterprise AI Solutions",
-      description: "Developing next-generation artificial intelligence systems for enterprise-level automation and decision making.",
-      status: "In Development",
-      completion: 75
-    },
-    {
-      title: "Digital Infrastructure Platform",
-      description: "Building scalable cloud infrastructure solutions that enable seamless digital transformation for businesses.",
-      status: "Active",
-      completion: 90
-    },
-    {
-      title: "Data Analytics Suite",
-      description: "Comprehensive analytics platform providing real-time insights and predictive modeling capabilities.",
-      status: "Testing Phase",
-      completion: 85
-    }
-  ];
-
-  const upcomingProjects = [
-    {
-      title: "Quantum Computing Research",
-      description: "Exploring quantum computing applications for complex optimization problems in various industries.",
-      timeline: "Q2 2025",
-      category: "Research"
-    },
-    {
-      title: "Sustainable Tech Initiative",
-      description: "Developing eco-friendly technology solutions to reduce carbon footprint in digital operations.",
-      timeline: "Q3 2025",
-      category: "Innovation"
-    },
-    {
-      title: "Global Expansion Platform",
-      description: "Creating tools and frameworks to help businesses expand internationally with ease.",
-      timeline: "Q4 2025",
-      category: "Development"
-    }
-  ];
-
   return (
-    <div className="min-h-screen bg-background text-foreground relative">
-      {/* Background Image with Parallax Effect */}
-      <div 
-        className="fixed inset-0 w-full h-full bg-cover bg-center bg-no-repeat z-0"
-        style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=2070')`,
-          backgroundAttachment: 'fixed'
-        }}
-      />
-      
-      {/* Content Overlay */}
-      <div className="relative z-10 bg-background/90 backdrop-blur-sm">
-        {/* Navigation */}
-        <nav className="fixed top-0 w-full bg-background/95 backdrop-blur-sm border-b border-border z-50 animate-bounce-gentle">
-          <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div className="text-2xl font-bold tracking-tight animate-pulse-soft">OXODONIA</div>
-            
-            {/* Logo */}
-            <div className="absolute top-1/2 right-6 transform -translate-y-1/2">
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white snowdonia-background">
+      {/* Navigation */}
+      <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-sm shadow-sm z-50 border-b">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            {/* Logo on top-left */}
+            <div className="flex-shrink-0">
               <img 
-                src="/lovable-uploads/16b7eb09-0bd6-49b3-964f-6c4e58c66c18.png" 
+                src="/lovable-uploads/f93c6ff4-598c-47fe-ac72-5d11c838aedc.png" 
                 alt="Oxodonia Logo" 
-                className="h-10 w-auto animate-bounce-logo"
+                className="h-10 w-auto animate-bounce-gentle"
               />
             </div>
             
-            <div className="hidden md:flex space-x-8 mr-20">
-              <button 
-                onClick={() => scrollToSection('about')}
-                className="text-muted-foreground hover:text-foreground transition-all duration-300 transform hover:scale-110 hover:bounce-button"
-              >
-                About
-              </button>
-              <button 
-                onClick={() => scrollToSection('projects')}
-                className="text-muted-foreground hover:text-foreground transition-all duration-300 transform hover:scale-110 hover:bounce-button"
-              >
-                Projects
-              </button>
-              <button 
-                onClick={() => scrollToSection('upcoming')}
-                className="text-muted-foreground hover:text-foreground transition-all duration-300 transform hover:scale-110 hover:bounce-button"
-              >
-                Upcoming
-              </button>
-              <button 
-                onClick={() => scrollToSection('contact')}
-                className="text-muted-foreground hover:text-foreground transition-all duration-300 transform hover:scale-110 hover:bounce-button"
-              >
-                Contact
-              </button>
+            {/* Navigation Links */}
+            <div className="hidden md:block">
+              <div className="ml-10 flex items-baseline space-x-4">
+                {[
+                  { id: "hero", label: "Home" },
+                  { id: "about", label: "About" },
+                  { id: "projects", label: "Projects" },
+                  { id: "contact", label: "Contact" },
+                ].map((item) => (
+                  <button
+                    key={item.id}
+                    onClick={() => scrollToSection(item.id)}
+                    className={`px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 transform hover:scale-110 hover:animate-bounce-gentle ${
+                      activeSection === item.id
+                        ? "bg-blue-100 text-blue-700"
+                        : "text-gray-700 hover:text-blue-600 hover:bg-blue-50"
+                    }`}
+                  >
+                    {item.label}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
-        </nav>
+        </div>
+      </nav>
 
-        {/* Hero Section */}
-        <section className="min-h-screen flex items-center justify-center px-6 pt-16">
-          <div className="text-center max-w-4xl mx-auto">
-            <div className="mb-8">
-              <h1 className="text-6xl md:text-8xl font-bold mb-6 tracking-tight animate-fade-in-up">
-                OXODONIA
-              </h1>
-              <div className="w-24 h-1 bg-foreground mx-auto mb-8 animate-expand"></div>
-              <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto leading-relaxed animate-fade-in-delayed">
-                Pioneering innovation through cutting-edge technology solutions that transform businesses and shape the future.
-              </p>
-            </div>
-            
+      {/* Hero Section */}
+      <section id="hero" className="pt-16 min-h-screen flex items-center justify-center relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-purple-600/20"></div>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 animate-fade-in">
+            Pioneering Innovation Through{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+              Technology
+            </span>
+          </h1>
+          <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto animate-fade-in-delay">
+            Oxodonia is a forward-thinking technology company creating revolutionary solutions 
+            that drive digital transformation through AI, cloud infrastructure, and data analytics.
+          </p>
+          <div className="space-x-4">
             <Button 
-              onClick={() => scrollToSection('about')}
+              onClick={() => scrollToSection("projects")} 
+              size="lg" 
+              className="animate-bounce-gentle transform hover:scale-110 transition-all duration-300"
+            >
+              Explore Our Work
+            </Button>
+            <Button 
+              onClick={() => scrollToSection("contact")} 
               variant="outline" 
               size="lg"
-              className="group border-2 hover:bg-foreground hover:text-background transition-all duration-300 transform hover:scale-110 hover:animate-bounce-button"
+              className="animate-bounce-gentle transform hover:scale-110 transition-all duration-300"
             >
-              Discover Our Story
-              <ArrowDown className="ml-2 h-4 w-4 group-hover:translate-y-1 transition-transform animate-bounce-gentle" />
+              Get In Touch
             </Button>
           </div>
-        </section>
+        </div>
+        
+        {/* Scroll indicator */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+          <ChevronDown className="h-8 w-8 text-gray-400" />
+        </div>
+      </section>
 
-        {/* About Section */}
-        <section id="about" className="py-24 px-6">
-          <div className="container mx-auto max-w-6xl">
-            <div className="grid md:grid-cols-2 gap-16 items-center">
-              <div>
-                <h2 className="text-4xl md:text-5xl font-bold mb-6 animate-fade-in-up">
-                  Innovation Meets Excellence
-                </h2>
-                <p className="text-lg text-muted-foreground mb-6 leading-relaxed animate-fade-in-delayed">
-                  Oxodonia is a forward-thinking technology company dedicated to creating revolutionary solutions that drive digital transformation. We combine deep technical expertise with innovative thinking to deliver exceptional results.
-                </p>
-                <p className="text-lg text-muted-foreground leading-relaxed animate-fade-in-delayed">
-                  Our team of visionary engineers, designers, and strategists work collaboratively to push the boundaries of what's possible in technology.
-                </p>
-              </div>
-              
-              <div className="space-y-8">
-                <div className="flex items-start space-x-4 transform hover:scale-105 transition-all duration-300">
-                  <div className="w-12 h-12 border-2 border-foreground flex items-center justify-center animate-bounce-gentle">
-                    <Users className="h-6 w-6" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold mb-2">Expert Team</h3>
-                    <p className="text-muted-foreground">
-                      World-class professionals with decades of combined experience in cutting-edge technologies.
-                    </p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start space-x-4 transform hover:scale-105 transition-all duration-300">
-                  <div className="w-12 h-12 border-2 border-foreground flex items-center justify-center animate-bounce-gentle">
-                    <Target className="h-6 w-6" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold mb-2">Precision Focus</h3>
-                    <p className="text-muted-foreground">
-                      Strategic approach to innovation, ensuring every solution addresses real-world challenges.
-                    </p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start space-x-4 transform hover:scale-105 transition-all duration-300">
-                  <div className="w-12 h-12 border-2 border-foreground flex items-center justify-center animate-bounce-gentle">
-                    <Briefcase className="h-6 w-6" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold mb-2">Enterprise Ready</h3>
-                    <p className="text-muted-foreground">
-                      Scalable solutions designed for enterprise-level deployment and integration.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* What We Do Section */}
-        <section className="py-24 px-6 bg-muted/30">
-          <div className="container mx-auto max-w-6xl">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 animate-fade-in-up">
-                Transforming Ideas Into Reality
-              </h2>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto animate-fade-in-delayed">
-                We specialize in developing innovative technology solutions that drive business growth and operational excellence across multiple industries.
-              </p>
-            </div>
-            
-            <div className="grid md:grid-cols-3 gap-8">
-              <Card className="border-2 hover:shadow-lg transition-all duration-300 transform hover:scale-105 hover:animate-bounce-card">
-                <CardHeader>
-                  <CardTitle className="text-xl">AI & Machine Learning</CardTitle>
-                  <CardDescription>
-                    Advanced artificial intelligence solutions that automate processes and enhance decision-making capabilities.
-                  </CardDescription>
-                </CardHeader>
-              </Card>
-              
-              <Card className="border-2 hover:shadow-lg transition-all duration-300 transform hover:scale-105 hover:animate-bounce-card">
-                <CardHeader>
-                  <CardTitle className="text-xl">Cloud Infrastructure</CardTitle>
-                  <CardDescription>
-                    Scalable cloud-native platforms that provide robust, secure, and efficient digital infrastructure.
-                  </CardDescription>
-                </CardHeader>
-              </Card>
-              
-              <Card className="border-2 hover:shadow-lg transition-all duration-300 transform hover:scale-105 hover:animate-bounce-card">
-                <CardHeader>
-                  <CardTitle className="text-xl">Data Analytics</CardTitle>
-                  <CardDescription>
-                    Comprehensive analytics solutions that transform raw data into actionable business insights.
-                  </CardDescription>
-                </CardHeader>
-              </Card>
-            </div>
-          </div>
-        </section>
-
-        {/* Current Projects Section */}
-        <section id="projects" className="py-24 px-6">
-          <div className="container mx-auto max-w-6xl">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 animate-fade-in-up">
-                Active Initiatives
-              </h2>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto animate-fade-in-delayed">
-                Our current portfolio showcases innovative projects that are actively shaping the future of technology.
-              </p>
-            </div>
-            
-            <div className="space-y-8">
-              {currentProjects.map((project, index) => (
-                <Card key={index} className="border-2 hover:shadow-lg transition-all duration-300 group transform hover:scale-102 hover:animate-bounce-card">
-                  <CardHeader>
-                    <div className="flex justify-between items-start mb-4">
-                      <div>
-                        <CardTitle className="text-2xl mb-2">{project.title}</CardTitle>
-                        <div className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80 mb-3 transform hover:scale-105">{project.status}</div>
-                      </div>
-                      <div className="text-right">
-                        <div className="text-2xl font-bold animate-pulse-soft">{project.completion}%</div>
-                        <div className="text-sm text-muted-foreground">Complete</div>
-                      </div>
-                    </div>
-                    <CardDescription className="text-base leading-relaxed">
-                      {project.description}
-                    </CardDescription>
-                    <div className="mt-4">
-                      <div className="w-full bg-muted rounded-full h-2">
-                        <div 
-                          className="bg-foreground h-2 rounded-full transition-all duration-500 animate-expand-progress"
-                          style={{ width: `${project.completion}%` }}
-                        ></div>
-                      </div>
-                    </div>
-                  </CardHeader>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Upcoming Projects Section */}
-        <section id="upcoming" className="py-24 px-6 bg-muted/30">
-          <div className="container mx-auto max-w-6xl">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 animate-fade-in-up">
-                Future Innovations
-              </h2>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto animate-fade-in-delayed">
-                Exciting projects on the horizon that will further establish our position at the forefront of technological advancement.
-              </p>
-            </div>
-            
-            <div className="grid md:grid-cols-3 gap-8">
-              {upcomingProjects.map((project, index) => (
-                <Card key={index} className="border-2 hover:shadow-lg transition-all duration-300 group transform hover:scale-105 hover:animate-bounce-card">
-                  <CardHeader>
-                    <div className="flex items-center justify-between mb-3">
-                      <div className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-foreground transform hover:scale-105">{project.category}</div>
-                      <div className="flex items-center text-sm text-muted-foreground">
-                        <Clock className="h-4 w-4 mr-1 animate-bounce-gentle" />
-                        {project.timeline}
-                      </div>
-                    </div>
-                    <CardTitle className="text-xl mb-3">{project.title}</CardTitle>
-                    <CardDescription className="text-base leading-relaxed mb-4">
-                      {project.description}
-                    </CardDescription>
-                    <div className="flex items-center text-sm font-medium group-hover:text-foreground transition-colors">
-                      Learn More
-                      <ChevronRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform animate-bounce-gentle" />
-                    </div>
-                  </CardHeader>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Contact Section */}
-        <section id="contact" className="py-24 px-6">
-          <div className="container mx-auto max-w-6xl">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 animate-fade-in-up">
-                Get In Touch
-              </h2>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8 animate-fade-in-delayed">
-                Ready to transform your business with innovative technology solutions? Contact us to discuss your project.
-              </p>
-              
-              <div className="flex items-center justify-center space-x-3 text-lg transform hover:scale-105 transition-all duration-300">
-                <Mail className="h-5 w-5 animate-bounce-gentle" />
-                <a 
-                  href="mailto:info@oxodonia.co.uk" 
-                  className="text-foreground hover:text-muted-foreground transition-colors underline hover:animate-bounce-button"
-                >
-                  info@oxodonia.co.uk
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Footer */}
-        <footer className="py-16 px-6 border-t border-border">
-          <div className="container mx-auto max-w-6xl text-center">
-            <div className="text-3xl font-bold mb-4 animate-pulse-soft">OXODONIA</div>
-            <p className="text-muted-foreground mb-8">
-              Pioneering the future through innovative technology solutions.
+      {/* About Section */}
+      <section id="about" className="py-20 bg-white/80 backdrop-blur-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Transforming Ideas Into Reality
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              We specialize in cutting-edge technology solutions that empower businesses 
+              to thrive in the digital age. Our expertise spans artificial intelligence, 
+              cloud computing, and advanced data analytics.
             </p>
-            <div className="w-24 h-1 bg-foreground mx-auto animate-expand"></div>
           </div>
-        </footer>
-      </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            <Card className="transform hover:scale-105 transition-all duration-300 hover:shadow-lg animate-bounce-gentle">
+              <CardHeader>
+                <CardTitle className="text-blue-600">Innovation First</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-600">
+                  We push the boundaries of what's possible, constantly exploring new 
+                  technologies and methodologies to deliver breakthrough solutions.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="transform hover:scale-105 transition-all duration-300 hover:shadow-lg animate-bounce-gentle">
+              <CardHeader>
+                <CardTitle className="text-purple-600">Client-Centric</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-600">
+                  Every solution is tailored to our clients' unique needs, ensuring 
+                  maximum value and seamless integration with existing systems.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="transform hover:scale-105 transition-all duration-300 hover:shadow-lg animate-bounce-gentle">
+              <CardHeader>
+                <CardTitle className="text-green-600">Future-Ready</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-600">
+                  Our solutions are built to scale and adapt, ensuring they remain 
+                  relevant and powerful as technology continues to evolve.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Projects Section */}
+      <section id="projects" className="py-20 bg-gray-50/80 backdrop-blur-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Our Current Projects
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Discover the innovative solutions we're building today that will shape tomorrow's digital landscape.
+            </p>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-8 mb-12">
+            <Card className="transform hover:scale-105 transition-all duration-300 hover:shadow-lg animate-bounce-gentle">
+              <CardHeader>
+                <CardTitle className="text-2xl text-blue-600">The Unified Public Service Platform (UPSP)</CardTitle>
+                <CardDescription className="text-lg">
+                  Government Digital Transformation
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-600 mb-4">
+                  The Unified Public Service Platform (UPSP) makes money by selling software-as-a-service (SaaS) licenses to local governments, not to citizens. The services themselves (like applying for housing, reporting an issue, etc.) are still free for citizens — the platform just improves how those services are delivered. Councils and agencies pay us to provide the technology infrastructure, because it saves them money, improves service quality, and meets their digital transformation goals.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="transform hover:scale-105 transition-all duration-300 hover:shadow-lg animate-bounce-gentle">
+              <CardHeader>
+                <CardTitle className="text-2xl text-purple-600">AI-Powered Analytics Engine</CardTitle>
+                <CardDescription className="text-lg">
+                  Next-Generation Business Intelligence
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-600 mb-4">
+                  Our proprietary analytics engine uses advanced machine learning algorithms 
+                  to provide real-time insights and predictive analytics for enterprise clients.
+                </p>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  <span className="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">Machine Learning</span>
+                  <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Real-time Processing</span>
+                  <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">Predictive Analytics</span>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="transform hover:scale-105 transition-all duration-300 hover:shadow-lg animate-bounce-gentle">
+              <CardHeader>
+                <CardTitle className="text-2xl text-green-600">Cloud Infrastructure Suite</CardTitle>
+                <CardDescription className="text-lg">
+                  Scalable Enterprise Solutions
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-600 mb-4">
+                  A comprehensive cloud platform that enables businesses to deploy, 
+                  manage, and scale their applications with unprecedented ease and reliability.
+                </p>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">Auto-scaling</span>
+                  <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Multi-cloud</span>
+                  <span className="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">DevOps Integration</span>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="transform hover:scale-105 transition-all duration-300 hover:shadow-lg animate-bounce-gentle">
+              <CardHeader>
+                <CardTitle className="text-2xl text-orange-600">Smart IoT Management Platform</CardTitle>
+                <CardDescription className="text-lg">
+                  Connected Device Ecosystem
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-600 mb-4">
+                  An intelligent platform for managing and monitoring IoT devices at scale, 
+                  with advanced security features and automated optimization capabilities.
+                </p>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  <span className="px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-sm">IoT Management</span>
+                  <span className="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm">Security</span>
+                  <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">Edge Computing</span>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="py-20 bg-white/80 backdrop-blur-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Let's Build the Future Together
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Ready to transform your business with cutting-edge technology? 
+              Get in touch with our team of experts.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-12">
+            <div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">Get In Touch</h3>
+              <div className="space-y-4">
+                <div className="flex items-center space-x-3">
+                  <Mail className="h-6 w-6 text-blue-600" />
+                  <span className="text-lg text-gray-700">info@oxodonia.co.uk</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <Phone className="h-6 w-6 text-blue-600" />
+                  <span className="text-lg text-gray-700">+44 (0) 20 7946 0958</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <MapPin className="h-6 w-6 text-blue-600" />
+                  <span className="text-lg text-gray-700">London, United Kingdom</span>
+                </div>
+              </div>
+            </div>
+
+            <Card className="transform hover:scale-105 transition-all duration-300 hover:shadow-lg animate-bounce-gentle">
+              <CardHeader>
+                <CardTitle>Start Your Digital Transformation</CardTitle>
+                <CardDescription>
+                  Whether you're looking to modernize existing systems or build something entirely new, 
+                  we're here to help you succeed.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Button 
+                  className="w-full transform hover:scale-105 transition-all duration-300 animate-bounce-gentle" 
+                  size="lg"
+                >
+                  Schedule a Consultation
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-900 text-white py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h3 className="text-2xl font-bold mb-4">Oxodonia</h3>
+            <p className="text-gray-400 mb-6">
+              Pioneering Innovation Through Technology
+            </p>
+            <p className="text-gray-500 text-sm">
+              © 2024 Oxodonia. All rights reserved.
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
