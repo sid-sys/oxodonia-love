@@ -1,4 +1,3 @@
-
 import { ArrowDown, Users, Target, Briefcase, Clock, ChevronRight, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -236,7 +235,7 @@ const Index = () => {
                   <div className="flex justify-between items-start mb-4">
                     <div>
                       <CardTitle className="text-2xl mb-2">{project.title}</CardTitle>
-                      <Badge variant="secondary" className="mb-3">{project.status}</Badge>
+                      <div className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80 mb-3">{project.status}</div>
                     </div>
                     <div className="text-right">
                       <div className="text-2xl font-bold">{project.completion}%</div>
@@ -278,7 +277,7 @@ const Index = () => {
               <Card key={index} className="border-2 hover:shadow-lg transition-all duration-300 group">
                 <CardHeader>
                   <div className="flex items-center justify-between mb-3">
-                    <Badge variant="outline">{project.category}</Badge>
+                    <div className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-foreground">{project.category}</div>
                     <div className="flex items-center text-sm text-muted-foreground">
                       <Clock className="h-4 w-4 mr-1" />
                       {project.timeline}
