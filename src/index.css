@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -99,5 +100,159 @@
 
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* Custom Bouncy Animations */
+@keyframes bounce-gentle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes bounce-logo {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-3px) scale(1.05);
+  }
+}
+
+@keyframes bounce-button {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  25% {
+    transform: translateY(-2px) scale(1.02);
+  }
+  50% {
+    transform: translateY(-4px) scale(1.05);
+  }
+  75% {
+    transform: translateY(-2px) scale(1.02);
+  }
+}
+
+@keyframes bounce-card {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-2px) scale(1.02);
+  }
+}
+
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in-delayed {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes expand {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 6rem;
+  }
+}
+
+@keyframes expand-progress {
+  0% {
+    width: 0;
+  }
+}
+
+@keyframes pulse-soft {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+/* Animation Classes */
+.animate-bounce-gentle {
+  animation: bounce-gentle 3s ease-in-out infinite;
+}
+
+.animate-bounce-logo {
+  animation: bounce-logo 2s ease-in-out infinite;
+}
+
+.animate-bounce-button {
+  animation: bounce-button 0.6s ease-in-out;
+}
+
+.animate-bounce-card {
+  animation: bounce-card 0.4s ease-in-out;
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 1s ease-out;
+}
+
+.animate-fade-in-delayed {
+  animation: fade-in-delayed 1.2s ease-out;
+}
+
+.animate-expand {
+  animation: expand 2s ease-out;
+}
+
+.animate-expand-progress {
+  animation: expand-progress 2s ease-out;
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 2s ease-in-out infinite;
+}
+
+/* Hover States */
+.hover\:bounce-button:hover {
+  animation: bounce-button 0.6s ease-in-out;
+}
+
+.hover\:animate-bounce-card:hover {
+  animation: bounce-card 0.4s ease-in-out;
+}
+
+/* Scrolling Background Effect */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-bounce-gentle,
+  .animate-bounce-logo,
+  .animate-bounce-button,
+  .animate-bounce-card,
+  .animate-fade-in-up,
+  .animate-fade-in-delayed,
+  .animate-expand,
+  .animate-expand-progress,
+  .animate-pulse-soft {
+    animation: none;
   }
 }
